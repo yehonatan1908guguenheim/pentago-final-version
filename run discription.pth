@@ -1,0 +1,158 @@
+run 10 - the first run - trained the normal white trainer 
+run 2 - the second run - trained the w and b white trainer with a different schedualer
+run 3 - trained the black agent
+run 9- trained white vs alha beta
+epochs = 200000
+start_epoch = 0
+C = 350
+learning_rate = 0.01
+batch_size = 50
+
+env = puzzle()
+MIN_Buffer = 4000
+
+player1 = DQN_Agent(player=1, env=env,parametes_path=path_load)
+    player_hat = DQN_Agent(player=1, env=env, train=True)
+    Q = player1.DQN
+    Q_hat = Q.copy()
+    Q_hat.train = False
+    player_hat.DQN = Q_hat
+    
+    player2 = ABA(player=-1,puzzle=env)
+    buffer = ReplayBuffer(path=None)
+    #בריצות הבאות, אשר ידרשו שימוש בפרמטרים שנצברו והותאמו לפי הריצה הזאת(ההתחלתית) נבצע את הפעולות הבאות במקומות הבאים
+    #results_file=torch.load(results_path)
+    results = []#results_file['results']
+    avgLosses = []#results_file['avglosses']
+    avgLoss = 0
+    loss = 0
+    res = 0
+    best_res = -200
+    loss_count = 0
+    tester = Tester(player1=ABA(player=1, puzzle=env), player2=player1, env=env)
+    tester_fix = Tester(player1=player2, player2=player1, env=env)
+    random_results = []#torch.load(random_results_path)
+    best_random =0#max(random_results)
+    
+    
+    # init optimizer
+    optim = torch.optim.Adam(Q.parameters(), lr=learning_rate)
+    scheduler = torch.optim.lr_scheduler.StepLR(optim,20000, gamma=0.90)
+    #scheduler = torch.optim.lr_scheduler.MultiStepLR(optim,[30*50000, 30*100000, 30*250000, 30*500000], gamma=0.5)
+    
+run 11 -   (black white)
+ ## parameters#####
+    player1 = DQN_Agent(player=1, env=env,parametes_path=path_load)
+    player2 = DQN_Agent(player=-1, env=env,parametes_path=None)
+    player_hat = DQN_Agent(player=1, env=env,parametes_path=None) 
+    Q = player1.DQN
+    player2.DQN = Q
+    Q_hat = Q.copy()
+    Q_hat.train = False
+    player_hat.DQN = Q_hat
+    buffer = ReplayBuffer(path=None) # None
+    epochs = 200000
+    start_epoch = 0
+    C = 100
+    learning_rate = 0.001
+    batch_size = 50
+    MIN_Buffer = 4000
+    #results_file = torch.load(results_path)
+    results =[]  #results_file['results'] # []
+    avgLosses = []
+    avgLoss =  0
+    loss = 0
+    res = 0
+    best_res = -200
+    loss_count = 0
+    tester1 = Tester(player1=player1, player2=RA(player=-1, env=env), env=env)
+    tester2=Tester(player1=player2, player2=RA(player=1, env=env), env=env)
+    tester_fix = Tester(player1=Fix_Agent(env=env,player=1, train=False), player2=player2, env=env)
+    random_results =  []
+    best_random = 0
+        
+    # init optimizer
+    optim = torch.optim.Adam(Q.parameters(), lr=learning_rate)
+    scheduler = torch.optim.lr_scheduler.StepLR(optim,100000*30, gamma=0.90)
+    # scheduler = torch.optim.lr_scheduler.MultiStepLR(optim,[30*50000, 30*100000, 30*250000, 30*500000], gamma=0.5)
+    
+run_12-(black white)
+    ## parameters#####
+    player1 = DQN_Agent(player=1, env=env,parametes_path=path_load)
+    player2 = DQN_Agent(player=-1, env=env,parametes_path=None)
+    player_hat = DQN_Agent(player=1, env=env,parametes_path=None) 
+    Q = player1.DQN
+    player2.DQN = Q
+    Q_hat = Q.copy()
+    Q_hat.train = False
+    player_hat.DQN = Q_hat
+    buffer = ReplayBuffer(path=None) # None
+    epochs = 200000
+    start_epoch = 0
+    C = 100
+    learning_rate = 0.01
+    batch_size = 50
+    MIN_Buffer = 4000
+
+    
+    
+    
+    
+
+    #results_file = torch.load(results_path)
+    results =[]  #results_file['results'] # []
+    avgLosses = []
+    avgLoss =  0
+    loss = 0
+    res = 0
+    best_res = -200
+    loss_count = 0
+    tester1 = Tester(player1=player1, player2=RA(player=-1, env=env), env=env)
+    tester2=Tester(player1=player2, player2=RA(player=1, env=env), env=env)
+    tester_fix = Tester(player1=Fix_Agent(env=env,player=1, train=False), player2=player2, env=env)
+    random_results =  []
+    best_random = 0
+        
+    # init optimizer
+    optim = torch.optim.Adam(Q.parameters(), lr=learning_rate)
+    scheduler = torch.optim.lr_scheduler.StepLR(optim,1000*20, gamma=0.95)
+    # scheduler = torch.optim.lr_scheduler.MultiStepLR(optim,[30*50000, 30*100000, 30*250000, 30*500000], gamma=0.5)
+    
+run_4 - trained black
+epochs = 200000
+start_epoch = 0
+C = 100
+learning_rate = 0.01
+batch_size = 50
+env = puzzle()
+MIN_Buffer = 4000
+
+File_Num = 4
+player1 = DQN_Agent(player=-1, env=env,parametes_path=path_load)
+    player_hat = DQN_Agent(player=1, env=env, train=True)
+    Q = player1.DQN
+    Q_hat = Q.copy()
+    Q_hat.train = False
+    player_hat.DQN = Q_hat
+    
+    player2 = RA(player=1, env=env) 
+    buffer = ReplayBuffer(path=None)
+
+    results = []
+    avgLosses = []
+    avgLoss = 0
+    loss = 0
+    res = 0
+    best_res = -200
+    loss_count = 0
+    tester = Tester(player1=RA(player=1, env=env), player2=player1, env=env)
+    tester_fix = Tester(player1=player2, player2=player1, env=env)
+    random_results = []
+    best_random = -200
+    
+    
+    # init optimizer
+    optim = torch.optim.Adam(Q.parameters(), lr=learning_rate)
+    scheduler = torch.optim.lr_scheduler.StepLR(optim,1000, gamma=0.90)
+    #scheduler = torch.optim.lr_scheduler.MultiStepLR(optim,[30*50000, 30*100000, 30*250000, 30*500000], gamma=0.5)
+    
